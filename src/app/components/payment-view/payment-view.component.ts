@@ -42,7 +42,11 @@ export class PaymentViewComponent implements OnInit, OnDestroy {
       .subscribe(res => console.log(res)));
   }
 
-  costEmitter(cost: number) {
+  /**
+   * Функция приемник для евент эмиттера
+   * @param {number} cost - Итоговая сумма израсходованных средств (*)
+   */
+  public costEmitter(cost: number): void {
     this.totalCost = cost;
   }
 

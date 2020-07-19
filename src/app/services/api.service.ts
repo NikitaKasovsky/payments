@@ -15,6 +15,8 @@ export class ApiService {
 
   /**
    * Создать платеж
+   * @param {IPaymentCreateRequest} request - объект с полями name: string, cost: number
+   * @return {Observable<string>} - обзерабл
    */
   public createPayment(request: IPaymentCreateRequest): Observable<string> {
     const { name, cost } = request;
@@ -31,6 +33,7 @@ export class ApiService {
 
   /**
    * Получить список платежей
+   * @return {Observable<IPayment[]>} - обзерабл
    */
   public getPayments(): Observable<IPayment[]> {
     return of(this.payments);
@@ -38,6 +41,8 @@ export class ApiService {
 
   /**
    * Удалить платеж
+   * @param {number} id - id платежа
+   * @return {Observable<string>} - обзерабл
    */
   public deletePayment(id: number): Observable<string> {
     this.payments.splice(this.payments.findIndex((item: IPayment) => item.id === id), 1);

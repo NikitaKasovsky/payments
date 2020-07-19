@@ -25,6 +25,7 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
     private readonly api: ApiService
   ) { }
 
+  // Общая сумма израсходованных средств
   @Output() cost: EventEmitter<number> = new EventEmitter<number>();
 
   // Список платежей
@@ -49,12 +50,18 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
 
   /**
    * Удаление элемента из списки
+   * @param {number} id - id платежа (*)
    */
   public delete(id: number): void {
     this.subs.add(this.api.deletePayment(id)
       .subscribe(this.loadPayments.bind(this)));
   }
 
+  /**
+   * Детектим изменения количества отмеченных месяцев
+   * @param {number} id - id платежа (*)
+   * @param {number} i - индекс в массиве месяцев (*)
+   */
   public changeMonthCost(id: number, i: number): void {
     const payment = this.payments.find((item: IPayment) => item.id === id);
 
@@ -67,6 +74,9 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
     this.culcTotalCost();
   }
 
+  /**
+   * Считаем итоговую сумму израсходованных средств
+   */
   private culcTotalCost(): void {
     const currentYear = new Date().getFullYear();
     const total = this.payments.map((payment: IPayment) => {

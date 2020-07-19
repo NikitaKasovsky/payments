@@ -1,8 +1,10 @@
 body {
   padding: 30px;
   font-family: Arial, sans-serif;
+  color: #0C2340;
 }
 
 button, input[type=checkbox] {
   cursor: pointer;
+  outline: none;
 }
