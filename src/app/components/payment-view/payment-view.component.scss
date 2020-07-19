@@ -12,10 +12,22 @@ $text: #0C2340;
   flex-wrap: wrap;
   width: 66%;
   align-items: baseline;
+  position: relative;
 
   &__input {
     margin: 0 24px 24px 0;
     flex: 1;
+  }
+
+  &__input-invalid {
+    border: red solid 2px;
+  }
+
+  &__validation-err {
+    font-size: x-small;
+    color: red;
+    position: absolute;
+    top: 20px;
   }
 
   &__button {

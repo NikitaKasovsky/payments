@@ -1,1 +1,1 @@
-export { IPayment } from './interfaces';
+export { IPayment, IPaymentCreateRequest } from './payments';

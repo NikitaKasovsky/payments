@@ -1,8 +1,10 @@
 .table {
+  border-collapse: collapse;
 
   th, td {
     border: #000 solid 1px;
-    border-collapse: collapse;
+    font-weight: 100;
+    padding: 5px 10px;
   }
 
   &__head {
@@ -10,7 +12,7 @@
   }
 
   &__payment-name {
-    width: 18%;
+    width: 20%;
   }
 
   &__payment-cost {

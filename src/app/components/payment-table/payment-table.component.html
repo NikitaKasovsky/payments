@@ -5,4 +5,13 @@
     <th *ngFor="let month of months">{{ month }}</th>
     <th>Удалить</th>
   </tr>
+
+  <tr *ngFor="let payment of payments">
+    <td>{{ payment.name }}</td>
+    <td>{{ payment.cost }}</td>
+    <td *ngFor="let month of months">
+      <input type="checkbox">
+    </td>
+    <td (click)="delete(payment.id)">+</td>
+  </tr>
 </table>

@@ -3,18 +3,31 @@
 <div class="add-payment" [formGroup]="form">
   <input
     class="add-payment__input"
+    [class.add-payment__input-invalid]="form.invalid && !form.pristine"
     formControlName="name"
     type="text"
     placeholder="Наименование платежа *">
+  <span
+    *ngIf="form.get('name').invalid && !form.get('name').pristine"
+    class="add-payment__validation-err">
+    Это поле обязательно для заполнения
+  </span>
 
   <input
     class="add-payment__input"
     formControlName="costPerDay"
     type="number"
+    min="0"
     placeholder="Стоимость за день">
+  <span
+    *ngIf="form.get('costPerDay').invalid && !form.get('costPerDay').pristine"
+    class="add-payment__validation-err">
+    Значение должно быть не меньше нуля
+  </span>
 
   <button
     class="add-payment__button"
+    (click)="add()"
     [disabled]="form.invalid">
     Добавить
   </button>
