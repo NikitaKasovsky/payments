@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Корневой компонент платежей "вьюшка платежей"
 @Component({
@@ -10,7 +11,15 @@ export class PaymentViewComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  // Форма добавления элемента в таблицу платежей
+  public form = new FormGroup({
+    name: new FormControl(null, Validators.required),
+    costPerDay: new FormControl(null)
+  });
+
+  /**
+   * Инициализация компонента
+   */
+  public ngOnInit(): void {}
 
 }

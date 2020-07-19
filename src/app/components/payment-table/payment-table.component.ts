@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+// Временная константа с месяцами
+const MONTHS = [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+
 // Компонент "Таблица платежей"
 @Component({
   selector: 'app-payment-table',
@@ -10,7 +13,12 @@ export class PaymentTableComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  // Месяцы
+  public months = MONTHS;
+
+  /**
+   * Инициализация компонента
+   */
+  public ngOnInit(): void {}
 
 }

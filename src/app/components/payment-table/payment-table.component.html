@@ -1,3 +1,8 @@
-<p>
-  payment-table works!
-</p>
+<table>
+  <tr>
+    <th>Наименование платежа</th>
+    <th>Стоимость</th>
+    <th *ngFor="let month of months">{{ month }}</th>
+    <th>Удалить</th>
+  </tr>
+</table>

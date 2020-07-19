@@ -1,3 +1,18 @@
-<p>
-  payment-view works!
-</p>
+<div>Состояние платежей</div>
+
+<div [formGroup]="form">
+  <input
+    formControlName="name"
+    type="text"
+    placeholder="Наименование платежа *">
+
+  <input
+    formControlName="costPerDay"
+    type="text"
+    placeholder="Стоимость за день">
+
+  <button
+    [disabled]="form.invalid">Добавить</button>
+</div>
+
+<app-payment-table></app-payment-table>
