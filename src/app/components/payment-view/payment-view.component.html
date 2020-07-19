@@ -1,18 +1,23 @@
-<div>Состояние платежей</div>
+<div class="title">Состояние платежей</div>
 
-<div [formGroup]="form">
+<div class="add-payment" [formGroup]="form">
   <input
+    class="add-payment__input"
     formControlName="name"
     type="text"
     placeholder="Наименование платежа *">
 
   <input
+    class="add-payment__input"
     formControlName="costPerDay"
-    type="text"
+    type="number"
     placeholder="Стоимость за день">
 
   <button
-    [disabled]="form.invalid">Добавить</button>
+    class="add-payment__button"
+    [disabled]="form.invalid">
+    Добавить
+  </button>
 </div>
 
 <app-payment-table></app-payment-table>

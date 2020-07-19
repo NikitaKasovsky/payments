@@ -1,0 +1,19 @@
+.table {
+
+  th, td {
+    border: #000 solid 1px;
+    border-collapse: collapse;
+  }
+
+  &__head {
+    background-color: #cccccc;
+  }
+
+  &__payment-name {
+    width: 18%;
+  }
+
+  &__payment-cost {
+    width: 18%;
+  }
+}

@@ -1,0 +1,1 @@
+export { IPayment } from './interfaces';

@@ -1,0 +1,28 @@
+// Цвета
+$text: #0C2340;
+
+.title {
+  padding-bottom: 24px;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.add-payment {
+  display: flex;
+  flex-wrap: wrap;
+  width: 66%;
+  align-items: baseline;
+
+  &__input {
+    margin: 0 24px 24px 0;
+    flex: 1;
+  }
+
+  &__button {
+    cursor: pointer;
+  }
+
+  &__button:disabled {
+    cursor: default;
+  }
+}
