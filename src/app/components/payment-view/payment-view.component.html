@@ -1,36 +1,42 @@
 <div class="title">Состояние платежей</div>
 
 <div class="add-payment" [formGroup]="form">
-  <input
-    class="add-payment__input"
-    [class.add-payment__input-invalid]="form.invalid && !form.pristine"
-    formControlName="name"
-    type="text"
-    placeholder="Наименование платежа *">
-  <span
-    *ngIf="form.get('name').invalid && !form.get('name').pristine"
-    class="add-payment__validation-err">
-    Это поле обязательно для заполнения
-  </span>
+  <div class="wrapper">
+    <input
+      class="add-payment__input"
+      [class.add-payment__input-invalid]="form.get('name').invalid && !form.get('name').pristine"
+      formControlName="name"
+      type="text"
+      placeholder="Наименование платежа *">
+    <span
+      *ngIf="form.get('name').invalid && !form.get('name').pristine"
+      class="add-payment__validation-err">
+      Это поле обязательно для заполнения
+    </span>
+  </div>
 
-  <input
-    class="add-payment__input"
-    formControlName="costPerDay"
-    type="number"
-    min="0"
-    placeholder="Стоимость за день">
-  <span
-    *ngIf="form.get('costPerDay').invalid && !form.get('costPerDay').pristine"
-    class="add-payment__validation-err">
-    Значение должно быть не меньше нуля
-  </span>
+  <div class="wrapper">
+    <input
+      class="add-payment__input"
+      [class.add-payment__input-invalid]="form.get('costPerDay').invalid && !form.get('costPerDay').pristine"
+      formControlName="costPerDay"
+      type="number"
+      min="0"
+      placeholder="Стоимость за день">
+    <span
+      *ngIf="form.get('costPerDay').invalid && !form.get('costPerDay').pristine"
+      class="add-payment__validation-err">
+      Значение должно быть не меньше либо равно нулю
+    </span>
+  </div>
 
   <button
-    class="add-payment__button"
     (click)="add()"
     [disabled]="form.invalid">
     Добавить
   </button>
 </div>
 
-<app-payment-table></app-payment-table>
+<app-payment-table (cost)="costEmitter($event)"></app-payment-table>
+
+<div class="counter">Израсходовано средств: <span class="counter__total">{{ totalCost }}</span></div>

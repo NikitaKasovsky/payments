@@ -5,10 +5,16 @@
     border: #000 solid 1px;
     font-weight: 100;
     padding: 5px 10px;
+    text-align: center;
   }
 
   &__head {
     background-color: #cccccc;
+  }
+
+  &__row:hover {
+    opacity: 0.8;
+    background-color :#4495cc24;
   }
 
   &__payment-name {
@@ -17,5 +23,25 @@
 
   &__payment-cost {
     width: 18%;
+  }
+
+  &__row-even {
+    background-color: #ececec;
+  }
+
+  &__remove-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #727272;
+    color: #fff;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transition: .2s;
+  }
+
+  &__remove-button:hover {
+    background-color: #f00;
   }
 }

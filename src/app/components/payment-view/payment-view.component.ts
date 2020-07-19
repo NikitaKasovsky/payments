@@ -29,6 +29,9 @@ export class PaymentViewComponent implements OnInit, OnDestroy {
   // Подписки
   private subs: Subscription = new Subscription();
 
+  // Сумма израсходованных средств
+  public totalCost = 0;
+
   /**
    * Добавление платежа
    */
@@ -37,6 +40,10 @@ export class PaymentViewComponent implements OnInit, OnDestroy {
 
     this.subs.add(this.api.createPayment({ name, cost: costPerDay })
       .subscribe(res => console.log(res)));
+  }
+
+  costEmitter(cost: number) {
+    this.totalCost = cost;
   }
 
   // ----------------------------------------------------

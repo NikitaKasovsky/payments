@@ -23,7 +23,7 @@ export class ApiService {
       id: this.payments.length,
       name,
       cost,
-      months: 1
+      months: []
     });
 
     return of('200');

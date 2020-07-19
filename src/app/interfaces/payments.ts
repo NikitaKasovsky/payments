@@ -2,7 +2,7 @@ export interface IPayment {
   id: number;
   name: string;
   cost: number;
-  months: any;
+  months: number[];
 }
 
 export interface IPaymentCreateRequest {

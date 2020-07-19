@@ -6,12 +6,18 @@
     <th>Удалить</th>
   </tr>
 
-  <tr *ngFor="let payment of payments">
+  <tr class="table__row"*ngFor="let payment of payments; odd as even" [class.table__row-even]="even">
     <td>{{ payment.name }}</td>
     <td>{{ payment.cost }}</td>
-    <td *ngFor="let month of months">
-      <input type="checkbox">
+    <td *ngFor="let month of months, let i = index">
+      <input class="table__checkbox" type="checkbox" (change)="changeMonthCost(payment.id, i + 1)">
     </td>
-    <td (click)="delete(payment.id)">+</td>
+    <td (click)="delete(payment.id)">
+      <button class="table__remove-button">+</button>
+    </td>
+  </tr>
+
+  <tr *ngIf="!payments.length">
+    <td colspan="15">Добавьте платежи...</td>
   </tr>
 </table>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Сервисы
@@ -7,7 +7,10 @@ import { ApiService } from 'src/app/services';
 // Интерфейсы
 import { IPayment } from 'src/app/interfaces';
 
-// Временная константа с месяцами
+// Хелперы
+import { daysInMonth } from 'src/app/helpers';
+
+// Константа с месяцами
 const MONTHS = [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 // Компонент "Таблица платежей"
@@ -21,6 +24,8 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
   constructor(
     private readonly api: ApiService
   ) { }
+
+  @Output() cost: EventEmitter<number> = new EventEmitter<number>();
 
   // Список платежей
   public payments: IPayment[] = [];
@@ -38,6 +43,7 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
     this.subs.add(this.api.getPayments()
       .subscribe((items: IPayment[]) => {
         this.payments = items;
+        this.culcTotalCost();
       }));
   }
 
@@ -47,6 +53,36 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
   public delete(id: number): void {
     this.subs.add(this.api.deletePayment(id)
       .subscribe(this.loadPayments.bind(this)));
+  }
+
+  public changeMonthCost(id: number, i: number): void {
+    const payment = this.payments.find((item: IPayment) => item.id === id);
+
+    if (payment.months.length && !!payment.months.find((month: number) => month === i)) {
+      payment.months.splice(payment.months.findIndex((item: number) => item === i), 1);
+    } else {
+      payment.months.push(i);
+    }
+
+    this.culcTotalCost();
+  }
+
+  private culcTotalCost(): void {
+    const currentYear = new Date().getFullYear();
+    const total = this.payments.map((payment: IPayment) => {
+      return {
+        id: payment.id,
+        days: payment.months.map((month: number) => {
+          return daysInMonth(month, currentYear);
+        })
+      };
+    }).map(item => {
+      const days = item.days.reduce((a, b) => a + b, 0);
+      const payment: IPayment = this.payments.find((pay: IPayment) => pay.id === item.id);
+      return  days * payment.cost
+    });
+
+    this.cost.emit(total.reduce((a, b) => a + b, 0));
   }
 
   // ----------------------------------------------------
