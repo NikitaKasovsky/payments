@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Сервисы
@@ -10,8 +10,8 @@ import { IPayment } from 'src/app/interfaces';
 // Хелперы
 import { daysInMonth } from 'src/app/helpers';
 
-// Константа с месяцами
-const MONTHS = [ 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+// Константы
+import { MONTHS } from 'src/app/constants';
 
 // Компонент "Таблица платежей"
 @Component({
@@ -25,9 +25,6 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
     private readonly api: ApiService
   ) { }
 
-  // Общая сумма израсходованных средств
-  @Output() cost: EventEmitter<number> = new EventEmitter<number>();
-
   // Список платежей
   public payments: IPayment[] = [];
 
@@ -36,6 +33,9 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
 
   // Подписки
   private subs: Subscription = new Subscription();
+
+  // Сумма израсходованных средств
+  public totalCost = 0;
 
   /**
    * Загрузить список платежей
@@ -92,7 +92,7 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
       return  days * payment.cost
     });
 
-    this.cost.emit(total.reduce((a, b) => a + b, 0));
+    this.totalCost = total.reduce((a, b) => a + b, 0);
   }
 
   // ----------------------------------------------------

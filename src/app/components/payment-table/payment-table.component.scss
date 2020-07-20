@@ -45,3 +45,11 @@
     background-color: #f00;
   }
 }
+
+.counter {
+  padding-top: 24px;
+
+  &__total {
+    font-weight: bolder;
+  }
+}

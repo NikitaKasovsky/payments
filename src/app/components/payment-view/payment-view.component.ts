@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { numberPositiveValidator } from 'src/app/validators';
   templateUrl: './payment-view.component.html',
   styleUrls: ['./payment-view.component.scss']
 })
-export class PaymentViewComponent implements OnInit, OnDestroy {
+export class PaymentViewComponent implements OnDestroy {
 
   constructor(
     private readonly api: ApiService
@@ -29,33 +29,17 @@ export class PaymentViewComponent implements OnInit, OnDestroy {
   // Подписки
   private subs: Subscription = new Subscription();
 
-  // Сумма израсходованных средств
-  public totalCost = 0;
-
   /**
    * Добавление платежа
    */
-  public add() {
+  public add(): void {
     const { name, costPerDay } = this.form.value;
 
     this.subs.add(this.api.createPayment({ name, cost: costPerDay })
-      .subscribe(res => console.log(res)));
-  }
-
-  /**
-   * Функция приемник для евент эмиттера
-   * @param {number} cost - Итоговая сумма израсходованных средств (*)
-   */
-  public costEmitter(cost: number): void {
-    this.totalCost = cost;
+      .subscribe(() => this.form.reset()));
   }
 
   // ----------------------------------------------------
-  /**
-   * Инициализация компонента
-   */
-  public ngOnInit(): void {}
-
   /**
    * Уничтожение компонента
    */
