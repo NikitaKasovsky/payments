@@ -54,7 +54,7 @@ export class PaymentTableComponent implements OnInit, OnDestroy {
    */
   public delete(id: number): void {
     this.subs.add(this.api.deletePayment(id)
-      .subscribe(this.loadPayments.bind(this)));
+      .subscribe(() => this.loadPayments()));
   }
 
   /**
